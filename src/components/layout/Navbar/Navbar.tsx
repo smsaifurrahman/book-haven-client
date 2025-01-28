@@ -3,6 +3,45 @@
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
+   const authLinks = (
+      <>
+         <li>
+            <NavLink
+               to={"/login"}
+               className={({ isActive }) =>
+                  isActive
+                     ? " font-bold text-2xl text-gray-600 p-2 text-rounded-xl "
+                     : "font-bold p-2 text-2xl text-orange-500 rounded-xl "
+               }
+            >
+               Login
+            </NavLink>
+         </li>
+         <li>
+            <NavLink
+               to={"/register"}
+               className={({ isActive }) =>
+                  isActive
+                     ? " font-bold text-2xl text-gray-600 p-2 text-rounded-xl "
+                     : "font-bold p-2 text-2xl text-orange-500 rounded-xl "
+               }
+            >
+               Register
+            </NavLink>
+         </li>
+         <li>
+            <NavLink
+               to={"/books"}
+               className={({ isActive }) =>
+                  isActive
+                     ? " font-bold text-2xl text-gray-600 p-2 text-rounded-xl "
+                     : "font-bold p-2 text-2xl text-orange-500 rounded-xl "
+               }
+            ></NavLink>
+         </li>
+      </>
+   );
+
    const navLinks = (
       <>
          <li>
@@ -19,16 +58,27 @@ const Navbar = () => {
          </li>
          <li>
             <NavLink
-               to={"/products"}
+               to={"/books"}
                className={({ isActive }) =>
                   isActive
                      ? " font-bold text-2xl text-gray-600 p-2 text-rounded-xl "
                      : "font-bold p-2 text-2xl text-orange-500 rounded-xl "
                }
             >
-               Books
+               All Books
             </NavLink>
          </li>
+         <li>
+            <NavLink
+               to={"/books"}
+               className={({ isActive }) =>
+                  isActive
+                     ? " font-bold text-2xl text-gray-600 p-2 text-rounded-xl "
+                     : "font-bold p-2 text-2xl text-orange-500 rounded-xl "
+               }
+            ></NavLink>
+         </li>
+         {authLinks}
       </>
    );
 
