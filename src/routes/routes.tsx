@@ -7,6 +7,9 @@ import Home from "../pages/Home/Home";
 import Books from "../pages/Books/Books";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import SidebarLayout from "../components/layout/DashboardLayout";
+import DashboardLayout from "../components/layout/DashboardLayout";
+import CreateBook from "../pages/Admin/CreateBook";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +34,18 @@ const router = createBrowserRouter([
         },
       ]
     },
+
+    {
+      path: '/dashboard',
+      element: <DashboardLayout />,
+      children: [
+        {
+          path: 'create-book',
+          element: <CreateBook />
+        }
+      ]
+    }
+
   ]);
 
   export default router

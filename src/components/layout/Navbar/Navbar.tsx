@@ -1,8 +1,13 @@
 /** @format */
 
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { getCurrentUser, logout } from "../../../redux/feature/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 
 const Navbar = () => {
+   const dispatch = useAppDispatch();
+   const user = useAppSelector(getCurrentUser);
+   console.log(user);
    const authLinks = (
       <>
          <li>
@@ -78,9 +83,12 @@ const Navbar = () => {
                }
             ></NavLink>
          </li>
-         {authLinks}
       </>
    );
+
+   const handleLogOut = () => {
+      dispatch(logout());
+   };
 
    return (
       <div className="navbar bg-green-100">
@@ -119,37 +127,67 @@ const Navbar = () => {
             <ul className="menu menu-horizontal px-1">{navLinks}</ul>
          </div>
          <div className="navbar-end">
-            <div className="dropdown dropdown-end">
-               <div
-                  tabIndex={0}
-                  role="button"
-                  className="btn btn-ghost btn-circle avatar"
-               >
-                  <div className="w-10 rounded-full">
-                     <img
-                        alt="Tailwind CSS Navbar component"
-                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                     />
+            {user ? (
+               <div className="dropdown dropdown-end">
+                  <div
+                     tabIndex={0}
+                     role="button"
+                     className="btn btn-ghost btn-circle avatar"
+                  >
+                     <div className="w-10 rounded-full">
+                        <img
+                           alt="Tailwind CSS Navbar component"
+                           src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                        />
+                        ;
+                     </div>
                   </div>
+                  <ul
+                     tabIndex={0}
+                     className="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-base-100 rounded-box w-48"
+                  >
+                    
+                     <li>
+                        <Link
+                           to={"/dashboard"}
+                           className=" text-xl font-sans justify-between"
+                        >
+                           Profile
+                        </Link>
+                     </li>
+                     <li>
+                        <Link
+                           to={"/dashboard"}
+                           className=" text-xl font-sans justify-between"
+                        >
+                           Dashboard
+                        </Link>
+                     </li>
+
+                     <li onClick={handleLogOut}>
+                        <a className=" text-xl font-sans justify-between">
+                           Logout
+                        </a>
+                     </li>
+                  </ul>
                </div>
-               <ul
-                  tabIndex={0}
-                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-               >
-                  <li>
-                     <a className="justify-between">
-                        Profile
-                        <span className="badge">New</span>
-                     </a>
-                  </li>
-                  <li>
-                     <a>Settings</a>
-                  </li>
-                  <li>
-                     <a>Logout</a>
-                  </li>
-               </ul>
-            </div>
+            ) : (
+               <>
+                  {" "}
+                  <Link to={"/login"}>
+                     {" "}
+                     <button className="btn bg-blue-500 hover:bg-blue-700 text-white font-bold mr-2">
+                        Login
+                     </button>{" "}
+                  </Link>
+                  <Link to={"/register"}>
+                     {" "}
+                     <button className="btn bg-blue-500 hover:bg-blue-700 text-white font-bold">
+                        Register
+                     </button>{" "}
+                  </Link>
+               </>
+            )}
          </div>
       </div>
    );
