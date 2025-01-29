@@ -23,8 +23,8 @@ export const adminPaths = [
             path: "create-book",
          },
          {
-            name: "View All Products",
-            path: "view-products",
+            name: "View All Books",
+            path: "view-all-books",
          },
          {
             name: "Manage Orders",

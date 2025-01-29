@@ -10,6 +10,7 @@ const bookApi = baseApi.injectEndpoints({
             url: "/books/get-all-books",
             method: "GET",
          }),
+         providesTags: ["allBooks"],
          transformResponse: (response: TResponseRedux<any>) => {
             console.log("from redux", response);
             return {
@@ -24,9 +25,21 @@ const bookApi = baseApi.injectEndpoints({
             method: "POST",
             body: data,
          }),
+         invalidatesTags: ["allBooks"],
+      }),
+      deleteBook: builder.mutation({
+         query: (id) => ({
+            url: `/books/delete-book/${id}`,
+            method: "DELETE",
+         }),
+         invalidatesTags: ["allBooks"],
       }),
    }),
 });
 
 // Export the generated hooks and endpoints
-export const { useGetAllBooksQuery, useAddBookMutation } = bookApi;
+export const {
+   useGetAllBooksQuery,
+   useAddBookMutation,
+   useDeleteBookMutation,
+} = bookApi;
