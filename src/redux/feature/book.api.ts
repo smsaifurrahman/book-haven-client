@@ -27,6 +27,19 @@ const bookApi = baseApi.injectEndpoints({
          }),
          invalidatesTags: ["allBooks"],
       }),
+      updateBook: builder.mutation({
+         query: (args) => {
+            console.log("Inside RTK mutation query function:", args);
+            return {
+               url: `/books/update-book/${args.id}`,
+               method: "PATCH",
+               body: args.updatedBookData,
+            };
+         },
+         
+         invalidatesTags: ["allBooks"],
+      }),
+
       deleteBook: builder.mutation({
          query: (id) => ({
             url: `/books/delete-book/${id}`,
@@ -42,4 +55,5 @@ export const {
    useGetAllBooksQuery,
    useAddBookMutation,
    useDeleteBookMutation,
+   useUpdateBookMutation,
 } = bookApi;
