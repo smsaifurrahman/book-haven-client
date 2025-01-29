@@ -1,6 +1,6 @@
 /** @format */
 
-import { TResponse, TResponseRedux } from "../../types/global";
+import { TResponseRedux } from "../../types/global";
 import { baseApi } from "../api/baseApi";
 
 const bookApi = baseApi.injectEndpoints({
@@ -10,16 +10,23 @@ const bookApi = baseApi.injectEndpoints({
             url: "/books/get-all-books",
             method: "GET",
          }),
-         transformResponse: (response: TResponseRedux<any>  ) => {
-            console.log( 'from redux', response);
+         transformResponse: (response: TResponseRedux<any>) => {
+            console.log("from redux", response);
             return {
                data: response.data,
-               meta: response.data.meta
-            }
-         }
+               meta: response.data.meta,
+            };
+         },
+      }),
+      AddBook: builder.mutation({
+         query: (data) => ({
+            url: "/books/create-book",
+            method: "POST",
+            body: data,
+         }),
       }),
    }),
 });
 
 // Export the generated hooks and endpoints
-export const { useGetAllBooksQuery } = bookApi;
+export const { useGetAllBooksQuery, useAddBookMutation } = bookApi;
