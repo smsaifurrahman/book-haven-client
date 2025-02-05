@@ -12,6 +12,8 @@ import ViewAllBooks from "../pages/Admin/ViewAllBooks";
 import BookDetails from "../components/BookCard/BookDetails";
 import VerifyOrder from "../pages/VerifyOrder";
 import OrderDetails from "../pages/OrderDetails";
+import ViewMyOrders from "../pages/User/ViewMyOrders";
+
 
 const router = createBrowserRouter([
    {
@@ -46,6 +48,7 @@ const router = createBrowserRouter([
             path: "/order/all-orders",
             element: <OrderDetails />,
          },
+        
       ],
    },
 
@@ -60,6 +63,10 @@ const router = createBrowserRouter([
          {
             path: "view-all-books",
             element: <ViewAllBooks />,
+         },
+         {
+            path: "view-my-orders",
+            element: <ViewMyOrders />,
          },
       ],
    },

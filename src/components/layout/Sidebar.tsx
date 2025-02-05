@@ -30,6 +30,7 @@ export const adminPaths = [
             name: "Manage Orders",
             path: "manage-orders",
          },
+         
     ]
   }
  ];
@@ -38,7 +39,7 @@ export const adminPaths = [
  export const userPaths = [
     {
        name: "View My Orders",
-       path: "my-orders",
+       path: "view-my-orders",
     },
     {
        name: "Browse Products",
