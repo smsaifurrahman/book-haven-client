@@ -9,6 +9,9 @@ import Register from "../pages/Register";
 import DashboardLayout from "../components/layout/DashboardLayout";
 import CreateBook from "../pages/Admin/CreateBook";
 import ViewAllBooks from "../pages/Admin/ViewAllBooks";
+import BookDetails from "../components/BookCard/BookDetails";
+import VerifyOrder from "../pages/VerifyOrder";
+import OrderDetails from "../pages/OrderDetails";
 
 const router = createBrowserRouter([
    {
@@ -30,6 +33,18 @@ const router = createBrowserRouter([
          {
             path: "/register",
             element: <Register />,
+         },
+         {
+            path: "/book-details",
+            element: <BookDetails />,
+         },
+         {
+            path: "/order/verify",
+            element: <VerifyOrder />,
+         },
+         {
+            path: "/order/all-orders",
+            element: <OrderDetails />,
          },
       ],
    },

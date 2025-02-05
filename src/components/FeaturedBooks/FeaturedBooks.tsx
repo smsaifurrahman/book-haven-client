@@ -12,4 +12,5 @@ console.log(data);
     );
 };
 
+
 export default FeaturedBooks;
