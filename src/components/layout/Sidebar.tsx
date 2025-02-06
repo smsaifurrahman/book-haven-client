@@ -1,24 +1,24 @@
 /** @format */
 
-import { Button,  Menu } from "antd";
+import { Button, Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
 import { useAppSelector } from "../../redux/hook";
-import {  TUser, useCurrentToken } from "../../redux/feature/auth/authSlice";
+import { TUser, useCurrentToken } from "../../redux/feature/auth/authSlice";
 import { verifyToken } from "../../utils/verifyToken";
 import { sidebarItemsGenerator } from "../../utils/sidebarItemsGenerator";
 import { Link } from "react-router-dom";
 
 const userRole = {
-    ADMIN: "admin",
-    USER:   "user",
- };
+   ADMIN: "admin",
+   USER: "user",
+};
 
 // Admin paths
 export const adminPaths = [
-  {
-    name: "Book Management",
-    children: [
-        {
+   {
+      name: "Book Management",
+      children: [
+         {
             name: "Create Book",
             path: "create-book",
          },
@@ -26,53 +26,65 @@ export const adminPaths = [
             name: "View All Books",
             path: "view-all-books",
          },
+   
+      ],
+   },
+   {
+      name: "User Management",
+      children: [
+         {
+            name: "View All Users",
+            path: "view-all-users",
+         },
+      ],
+   },
+   {
+      name: "Order Management",
+      children: [
+         {
+            name: "View All Orders",
+            path: "view-all-orders",
+         },
          {
             name: "Manage Orders",
             path: "manage-orders",
          },
-         
-    ]
-  }
- ];
- 
- // User paths
- export const userPaths = [
-    {
-       name: "View My Orders",
-       path: "view-my-orders",
-    },
-    {
-       name: "Browse Products",
-       path: "browse-products",
-    },
- ];
- 
+      ],
+   },
+];
 
+// User paths
+export const userPaths = [
+   {
+      name: "View My Orders",
+      path: "view-my-orders",
+   },
+   {
+      name: "Browse Products",
+      path: "browse-products",
+   },
+];
 
 const Sidebar = () => {
+   const token = useAppSelector(useCurrentToken);
+   let user;
+   if (token) {
+      user = verifyToken(token);
+   }
 
+   let sidebarItems;
 
- const token = useAppSelector(useCurrentToken);
- let user;
- if (token) {
-    user = verifyToken(token);
- }
-
- let sidebarItems;
-
- // Generate sidebar items based on role
- switch (( user as TUser)?.role ) {
-    case userRole.ADMIN:
-       sidebarItems = sidebarItemsGenerator(adminPaths, userRole.ADMIN);
-       break;
-    case userRole.USER:
-       sidebarItems = sidebarItemsGenerator(userPaths, userRole.USER);
-       break;
-    default:
-       break;
- }
-
-
+   // Generate sidebar items based on role
+   switch ((user as TUser)?.role) {
+      case userRole.ADMIN:
+         sidebarItems = sidebarItemsGenerator(adminPaths, userRole.ADMIN);
+         break;
+      case userRole.USER:
+         sidebarItems = sidebarItemsGenerator(userPaths, userRole.USER);
+         break;
+      default:
+         break;
+   }
 
    return (
       <Sider
@@ -86,9 +98,12 @@ const Sidebar = () => {
             console.log(collapsed, type);
          }}
       >
-        <div className="text-white mt-4 flex justify-center items-center">
-       <Link to={'/'}>   <Button> Home </Button></Link>
-        </div>
+         <div className="text-white mt-4 flex justify-center items-center">
+            <Link to={"/"}>
+               {" "}
+               <Button> Home </Button>
+            </Link>
+         </div>
          <Menu
             theme="dark"
             mode="inline"

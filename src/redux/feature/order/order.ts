@@ -9,8 +9,19 @@ const orderApi = baseApi.injectEndpoints({
         body: productInfo,
       }),
     }),
+    getAllOrders: builder.query({
+      query: () =>({
+        url: `/order/all-orders`,
+        // params: { user_id },
+        method: "GET",
+      }),
+    }),
     getOrders: builder.query({
-      query: () => "/order",
+      query: () =>({
+        url: `/order`,
+        // params: { user_id },
+        method: "GET",
+      }),
     }),
     verifyOrder: builder.query({
       query: (order_id) => ({
@@ -35,5 +46,6 @@ export const {
   useCreateOrderMutation,
   useGetMyOrdersQuery,
   useVerifyOrderQuery,
+  useGetAllOrdersQuery,
   useGetOrdersQuery
 } = orderApi;

@@ -14,6 +14,8 @@ import VerifyOrder from "../pages/VerifyOrder";
 import OrderDetails from "../pages/OrderDetails";
 import ViewMyOrders from "../pages/User/ViewMyOrders";
 import Profile from "../pages/User/Profile";
+import ViewAllUsers from "../pages/Admin/ViewAllUsers";
+import ViewAllOrders from "../pages/Admin/ViewAllOrders";
 
 
 const router = createBrowserRouter([
@@ -70,8 +72,16 @@ const router = createBrowserRouter([
             element: <ViewAllBooks />,
          },
          {
+            path: "view-all-users",
+            element: <ViewAllUsers />,
+         },
+         {
             path: "view-my-orders",
             element: <ViewMyOrders />,
+         },
+         {
+            path: "view-all-orders",
+            element: <ViewAllOrders />,
          },
       ],
    },
