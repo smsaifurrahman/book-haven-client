@@ -13,6 +13,7 @@ import BookDetails from "../components/BookCard/BookDetails";
 import VerifyOrder from "../pages/VerifyOrder";
 import OrderDetails from "../pages/OrderDetails";
 import ViewMyOrders from "../pages/User/ViewMyOrders";
+import Profile from "../pages/User/Profile";
 
 
 const router = createBrowserRouter([
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
          {
             path: "/register",
             element: <Register />,
+         },
+         {
+            path: "/profile",
+            element: <Profile />,
          },
          {
             path: "/book-details",

@@ -154,7 +154,7 @@ const Navbar = () => {
                     
                      <li>
                         <Link
-                           to={"/dashboard"}
+                           to={"/profile"}
                            className=" text-xl font-sans justify-between"
                         >
                            Profile
