@@ -33,17 +33,17 @@ const BookCard = ({ book }) => {
                <span className="font-semibold">{book.quantity} units</span>
             </p>
             <p className=""> Added: {formatDate(book.createdAt)}</p>
-{/* 
+
             <div className=" ">
                <Link to={`/book-details/${book?._id}`}>
                   <Button className="bg-red-50"> View Details </Button>
                </Link>
-            </div> */}
-            <div className=" ">
+            </div> 
+            {/* <div className=" ">
                <Link to={`/book-details`} state={{ book }}>
                   <Button className="bg-red-50"> View Details </Button>
                </Link>
-            </div>
+            </div> */}
          </div>
       </div>
    );

@@ -1,15 +1,25 @@
 /** @format */
 
-import { TResponseRedux } from "../../types/global";
+import { TQueryParams, TResponseRedux } from "../../types/global";
 import { baseApi } from "../api/baseApi";
 
 const bookApi = baseApi.injectEndpoints({
    endpoints: (builder) => ({
       getAllBooks: builder.query({
-         query: () => ({
-            url: "/books/get-all-books",
-            method: "GET",
-         }),
+         query: (agrs) => {
+            const params = new URLSearchParams();
+            console.log( 'args', agrs);
+            if (agrs) {
+               agrs.forEach((item: TQueryParams) => {
+                  params.append(item.name, item.value as string);
+               });
+            }
+            return {
+               url: `/books/get-all-books`,
+               method: "GET",
+               params: params
+            }
+         },
          providesTags: ["allBooks"],
          transformResponse: (response: TResponseRedux<any>) => {
             console.log("from redux", response);
@@ -18,6 +28,13 @@ const bookApi = baseApi.injectEndpoints({
                meta: response.data.meta,
             };
          },
+      }),
+
+      getSingleBook: builder.query({
+         query: (id) => ({
+            url: `/books/get-single-book/${id}`,
+            method: "GET",
+         }),
       }),
       AddBook: builder.mutation({
          query: (data) => ({
@@ -36,7 +53,7 @@ const bookApi = baseApi.injectEndpoints({
                body: args.updatedBookData,
             };
          },
-         
+
          invalidatesTags: ["allBooks"],
       }),
 
@@ -56,4 +73,5 @@ export const {
    useAddBookMutation,
    useDeleteBookMutation,
    useUpdateBookMutation,
+   useGetSingleBookQuery
 } = bookApi;

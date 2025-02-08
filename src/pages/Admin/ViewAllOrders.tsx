@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Table, Tag } from 'antd';
 import { useGetAllOrdersQuery } from "../../redux/feature/order/order";
@@ -11,13 +12,13 @@ const ViewAllOrders = () => {
       title: 'Order ID',
       dataIndex: '_id',
       key: 'id',
-      render: (text) => <b>{text}</b>,
+      render: (text : string) => <b>{text}</b>,
     },
     {
       title: 'Customer',
       dataIndex: 'user',
       key: 'user',
-      render: (user) => (
+      render: (user : any) => (
         <div>
           <p><b>{user?.name}</b></p>
           <p>{user?.email}</p>
@@ -28,7 +29,7 @@ const ViewAllOrders = () => {
       title: 'Transaction ID',
       dataIndex: 'transaction',
       key: 'transaction',
-      render: (transaction) => transaction?.id || 'N/A',
+      render: (transaction ) => transaction?.id || 'N/A',
     },
     {
       title: 'Payment Method',
@@ -40,13 +41,13 @@ const ViewAllOrders = () => {
       title: 'Amount',
       dataIndex: 'totalPrice',
       key: 'totalPrice',
-      render: (price) => `$${price}`,
+      render: (price: number) => `$${price}`,
     },
     {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
-      render: (status) => (
+      render: (status: string) => (
         <Tag color={status === 'Paid' ? 'green' : 'red'}>
           {status.toUpperCase()}
         </Tag>

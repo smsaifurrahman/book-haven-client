@@ -16,7 +16,7 @@ import ViewMyOrders from "../pages/User/ViewMyOrders";
 import Profile from "../pages/User/Profile";
 import ViewAllUsers from "../pages/Admin/ViewAllUsers";
 import ViewAllOrders from "../pages/Admin/ViewAllOrders";
-
+import ProtectedRoute from "./ProtectedRoute";
 
 const router = createBrowserRouter([
    {
@@ -41,10 +41,14 @@ const router = createBrowserRouter([
          },
          {
             path: "/profile",
-            element: <Profile />,
+            element: (
+               <ProtectedRoute role="user">
+                  <Profile />
+               </ProtectedRoute>
+            ),
          },
          {
-            path: "/book-details",
+            path: "/book-details/:id",
             element: <BookDetails />,
          },
          {
@@ -55,17 +59,25 @@ const router = createBrowserRouter([
             path: "/order/all-orders",
             element: <OrderDetails />,
          },
-        
       ],
    },
 
    {
       path: "/dashboard",
-      element: <DashboardLayout />,
+      element: (
+         // <ProtectedRoute role="user">
+         //    <DashboardLayout />
+         // </ProtectedRoute>
+         <DashboardLayout />
+      ),
       children: [
          {
             path: "create-book",
-            element: <CreateBook />,
+            element: (
+               <ProtectedRoute role="admin">
+                  <CreateBook />
+               </ProtectedRoute>
+            ),
          },
          {
             path: "view-all-books",
@@ -73,15 +85,27 @@ const router = createBrowserRouter([
          },
          {
             path: "view-all-users",
-            element: <ViewAllUsers />,
+            element: (
+               <ProtectedRoute role="admin">
+                  <ViewAllUsers />
+               </ProtectedRoute>
+            ),
          },
          {
             path: "view-my-orders",
-            element: <ViewMyOrders />,
+            element: (
+               <ProtectedRoute role="user">
+                  <ViewMyOrders />
+               </ProtectedRoute>
+            ),
          },
          {
             path: "view-all-orders",
-            element: <ViewAllOrders />,
+            element: (
+               <ProtectedRoute role="admin">
+                  <ViewAllOrders />
+               </ProtectedRoute>
+            ),
          },
       ],
    },

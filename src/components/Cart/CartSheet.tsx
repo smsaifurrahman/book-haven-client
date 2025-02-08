@@ -21,17 +21,32 @@ import {
    updateQuantity,
 } from "../../redux/feature/cart/cartSlice";
 import { Badge } from "../ui/badge";
+import { useCurrentToken } from "../../redux/feature/auth/authSlice";
+
+import { useNavigate } from "react-router-dom";
 
 export const CartSheet = () => {
    const dispatch = useAppDispatch();
+
+    const token = useAppSelector(useCurrentToken);
+    const navigate = useNavigate();
+      
 
    const cartData = useAppSelector((state) => state.cart);
    console.log(cartData.totalQuantity);
 
    const [createOrder, { isLoading, isSuccess, data, isError, error }] =
       useCreateOrderMutation();
+  
 
    const handlePlaceOrder = async () => {
+
+      if(!token) {
+       
+         return navigate('/login')
+         // return <Navigate to={"/login"} replace={true} />;
+      }
+
       await createOrder({ products: cartData.items });
    };
 
@@ -169,7 +184,7 @@ export const CartSheet = () => {
             <SheetFooter className="border-t pt-4">
                <SheetClose asChild>
                   <Button className="w-full" onClick={handlePlaceOrder}>
-                     Place Order
+                     Order Now
                   </Button>
                </SheetClose>
             </SheetFooter>

@@ -1,17 +1,17 @@
 /** @format */
 
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Star } from "lucide-react";
 import { Button } from "antd";
 import { formatDate } from "../../utils/formatDate";
 import { useAppDispatch } from "../../redux/hook";
 import { addToCart } from "../../redux/feature/cart/cartSlice";
+import { useGetSingleBookQuery } from "../../redux/feature/book.api";
 
 const BookDetails = () => {
-   const location = useLocation();
-   const book = location.state?.book;
-   console.log(book);
-
+const {id} = useParams();
+const {data} = useGetSingleBookQuery(id);
+const book = data?.data;
 
    const dispatch = useAppDispatch();
 

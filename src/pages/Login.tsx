@@ -6,6 +6,7 @@ import { useAppDispatch } from "../redux/hook";
 import { toast } from "sonner";
 import { verifyToken } from "../utils/verifyToken";
 import { setUser } from "../redux/feature/auth/authSlice";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type Inputs = {
    email: string;
@@ -15,6 +16,9 @@ type Inputs = {
 const Login = () => {
    const [login] = useLoginMutation();
    const disPatch = useAppDispatch();
+   const navigate = useNavigate();
+   const location = useLocation()
+   const redirectPath =  location?.state?.from?.pathname || "/";
    const {
       register,
       handleSubmit,
@@ -36,11 +40,15 @@ const Login = () => {
          const user = verifyToken(res.data.token);
        
          disPatch(setUser({user: user, token: res.data.token}))
-
+       
+         navigate(redirectPath, { replace: true });
+         console.log('redirectpath', redirectPath);
          toast.success("logged in successfully", {
             id: toastId,
             duration: 1000,
          });
+
+
       } catch (err) {
          console.log(err);
          toast.error("Something went wrong", { id: toastId, duration: 1000 });
