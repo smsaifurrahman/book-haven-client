@@ -56,13 +56,20 @@ export const adminPaths = [
 // User paths
 export const userPaths = [
    {
-      name: "View My Orders",
-      path: "view-my-orders",
+      name: "My Menu",
+      children: [
+         {
+            name: "View My Orders",
+            path: "view-my-orders",
+         },
+        
+      ],
    },
-   {
-      name: "Browse Products",
-      path: "browse-products",
-   },
+   // {
+   //    name: "View My Orders",
+   //    path: "view-my-orders",
+   // },
+  
 ];
 
 const Sidebar = () => {

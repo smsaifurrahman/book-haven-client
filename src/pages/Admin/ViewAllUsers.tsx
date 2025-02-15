@@ -1,13 +1,19 @@
-import { Table, Button, Skeleton, Tag } from 'antd'; // Import Tag for role display
+import { Table, Button, Skeleton, Tag, notification } from 'antd'; // Import Tag for role display
 import { useBlockUserMutation, useGetAllUsersQuery } from "../../redux/feature/admin/admin.api";
 
 const ViewAllUsers = () => {
   const { data, isLoading } = useGetAllUsersQuery(undefined);
   const [blockUser] = useBlockUserMutation();
 
-  const handleBlockUser = (userId) => {
+  const handleBlockUser = (userId : string) => {
     console.log(userId);
-    blockUser(userId);
+    blockUser(userId).then(() => {
+      notification.success({
+        message: 'User Deactivated',
+        description: 'The user has been successfully deactivated.',
+        placement: 'topRight', // You can adjust the position
+      });
+    });
   };
 
   const columns = [

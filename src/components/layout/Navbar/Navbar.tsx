@@ -152,14 +152,16 @@ const Navbar = () => {
                      className="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-base-100 rounded-box w-48"
                   >
                     
-                     <li>
-                        <Link
-                           to={"/profile"}
-                           className=" text-xl font-sans justify-between"
-                        >
-                           Profile
-                        </Link>
-                     </li>
+                    {
+                     user?.role == 'user' &&  <li>
+                     <Link
+                        to={"/profile"}
+                        className=" text-xl font-sans justify-between"
+                     >
+                        Profile
+                     </Link>
+                  </li>
+                    }
                      <li>
                         <Link
                            to={"/dashboard"}

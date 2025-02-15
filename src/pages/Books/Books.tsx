@@ -78,17 +78,17 @@ const Books = () => {
          console.log(data.meta.totalCount);
          setTotalPages(Math.ceil(data.meta.totalCount / 4)); // Calculate total pages based on totalCount and page size
       }
-   }, [data,data?.meta?.totalCount]);
+   }, [data, data?.meta?.totalCount]);
 
    const handlePageChange = (page: number) => {
       setCurrentPage(page); // Update current page
 
       // Preserve previous filters while updating the page number
       const updatedParams: TQueryParams[] = [
-         ...(params?.filter(param => param.name !== "page") || []), 
-         { name: "page", value: page.toString() } // Update page number
+         ...(params?.filter((param) => param.name !== "page") || []),
+         { name: "page", value: page.toString() }, // Update page number
       ];
-   
+
       setParams(updatedParams);
    };
 
@@ -175,7 +175,7 @@ const Books = () => {
          )}
 
          {/* Pagination */}
-         <div className="mt-4">
+         <div className="my-4 flex justify-center">
             <Pagination
                current={currentPage}
                total={totalCount}

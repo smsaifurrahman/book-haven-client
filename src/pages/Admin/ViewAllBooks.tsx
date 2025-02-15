@@ -11,6 +11,7 @@ import {
    Select,
    Upload,
    Typography,
+   Pagination,
 } from "antd";
 import {
    useDeleteBookMutation,
@@ -22,6 +23,7 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { UploadOutlined } from "@ant-design/icons";
 import { handleImageUpload } from "../../UploadImageToBB";
+import { TQueryParams } from "../../types/global";
 
 export type TTableData = Pick<
    TBook,
@@ -29,9 +31,12 @@ export type TTableData = Pick<
 > & { key: string };
 
 const ViewAllBooks = () => {
+   const [params, setParams] = useState<TQueryParams[] | undefined>(undefined);
+   const [currentPage, setCurrentPage] = useState(1);
    const [deleteBook] = useDeleteBookMutation();
    const [updateBook] = useUpdateBookMutation();
-   const { data, isFetching } = useGetAllBooksQuery(undefined);
+   const { data, isFetching } = useGetAllBooksQuery(params);
+   const totalCount = data?.meta?.totalCount;
    const bookData = data?.data.data;
    const [image, setImage] = useState<File | null>(null);
    const [form] = Form.useForm();
@@ -62,7 +67,18 @@ const ViewAllBooks = () => {
       }
    };
 
-   const handleUpdate = async ( data : TBook, id:string) => {
+   const handlePageChange = (page: number) => {
+      setCurrentPage(page); // Update current page
+
+      // Preserve previous filters while updating the page number
+      const params: TQueryParams[] = [
+         { name: "page", value: page.toString() }, // Update page number
+      ];
+
+      setParams(params);
+   };
+
+   const handleUpdate = async (data: TBook, id: string) => {
       const toastId = toast.loading("Updating book...");
 
       try {
@@ -73,19 +89,18 @@ const ViewAllBooks = () => {
             uploadedImageUrl = (await handleImageUpload(image)) as string;
          }
 
-         console.log( 'data',data);
-      
-         
+         console.log("data", data);
+
          const updatedBookData = {
             ...data,
             // Only update the fields user changed
             imageUrl: uploadedImageUrl, // Ensure image is updated properly
          };
 
-       
          const updatedInfo = {
-            updatedBookData, id
-         }
+            updatedBookData,
+            id,
+         };
          console.log(updatedInfo);
          const res = await updateBook(updatedInfo).unwrap();
          console.log(res);
@@ -163,7 +178,25 @@ const ViewAllBooks = () => {
 
    return (
       <>
-         <Table loading={isFetching} columns={columns} dataSource={tableData} />
+         <Table
+            loading={isFetching}
+            columns={columns}
+            pagination={false}
+            scroll={{ x: true }}
+            dataSource={tableData}
+         />
+
+         {/* Pagination */}
+         <div className="my-4 flex justify-center">
+            <Pagination
+               current={currentPage}
+               total={totalCount}
+               pageSize={5}
+               onChange={handlePageChange}
+               showSizeChanger={false}
+               hideOnSinglePage={true}
+            />
+         </div>
 
          {/* Modal for Update */}
          <Modal
@@ -178,7 +211,7 @@ const ViewAllBooks = () => {
             {currentBook && (
                <Form
                   form={form}
-                  onFinish= {(values) => handleUpdate( values, currentBook?.key )}
+                  onFinish={(values) => handleUpdate(values, currentBook?.key)}
                   labelCol={{ span: 8 }}
                   wrapperCol={{ span: 16 }}
                >
@@ -208,7 +241,6 @@ const ViewAllBooks = () => {
                   <Form.Item
                      label="Price"
                      name="price"
-                  
                      rules={[
                         { required: true, message: "Please input the price!" },
                      ]}
@@ -300,17 +332,18 @@ const ViewAllBooks = () => {
                         maxCount={1}
                         showUploadList={false}
                      >
-                     
                         <Button icon={<UploadOutlined />}>
                            Click to Upload
                         </Button>
-                        {image && <Typography.Text>{image.name}</Typography.Text>}
+                        {image && (
+                           <Typography.Text>{image.name}</Typography.Text>
+                        )}
                      </Upload>
                   </Form.Item>
 
                   {/* Submit Button */}
                   <Form.Item wrapperCol={{ span: 16, offset: 8 }}>
-                     <Button  type="primary" htmlType="submit">
+                     <Button type="primary" htmlType="submit">
                         Update
                      </Button>
                   </Form.Item>
