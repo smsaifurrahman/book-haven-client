@@ -95,7 +95,7 @@ const Books = () => {
    return (
       <div>
          {/* Search and Filter Section */}
-         <div className="mb-4 grid sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-0 ">
+         <div className="mb-4 grid sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-0  ">
             <div>
                <Input
                   placeholder="Search books..."
@@ -179,7 +179,7 @@ const Books = () => {
             <Pagination
                current={currentPage}
                total={totalCount}
-               pageSize={4}
+               pageSize={6}
                onChange={handlePageChange}
                showSizeChanger={false}
                hideOnSinglePage={true}

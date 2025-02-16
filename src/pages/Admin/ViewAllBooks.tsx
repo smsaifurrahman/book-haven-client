@@ -178,20 +178,21 @@ const ViewAllBooks = () => {
 
    return (
       <>
-         <Table
-            loading={isFetching}
-            columns={columns}
-            pagination={false}
-            scroll={{ x: true }}
-            dataSource={tableData}
-         />
-
+         <div className="min-h-[70vh]">
+            <Table
+               loading={isFetching}
+               columns={columns}
+               pagination={false}
+               scroll={{ x: true }}
+               dataSource={tableData}
+            />
+         </div>
          {/* Pagination */}
-         <div className="my-4 flex justify-center">
+         <div className=" flex justify-center">
             <Pagination
                current={currentPage}
                total={totalCount}
-               pageSize={5}
+               pageSize={6}
                onChange={handlePageChange}
                showSizeChanger={false}
                hideOnSinglePage={true}

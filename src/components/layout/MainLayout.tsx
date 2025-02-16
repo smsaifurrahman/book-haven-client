@@ -3,12 +3,15 @@
 import { Outlet } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import Navbar from "./Navbar/Navbar";
+import NavbarNew from "./Navbar/NavbarNew";
 
 const MainLayout = () => {
    return (
-    <div className=" mx-2 flex flex-col min-h-screen"> 
+    <div className=" mx-2 flex  flex-col min-h-screen"> 
     {/* Navbar at the top */}
-    <Navbar />
+    {/* <Navbar /> */}
+    <NavbarNew />
+    
 
     {/* Main content that expands */}
     <main className="flex-grow mx-2 mt-2 px-2 md:px-2 lg:px-0">

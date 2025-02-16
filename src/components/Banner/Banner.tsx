@@ -11,6 +11,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 const bannerData = [
    {
@@ -68,9 +69,9 @@ const BookHavenCarousel = () => {
                         <p className="text-sm md:text-lg max-w-2xl">
                            {item.description}
                         </p>
-                        <button className="mt-4 px-5 py-2 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold text-md md:text-lg rounded-md transition duration-300">
+                        <Link to={'/books'} className="mt-4 px-5 py-2 bg-indigo-700 hover:bg-indigo-600 text-white font-semibold text-md md:text-lg rounded-md transition duration-300">
                            Shop Now
-                        </button>
+                        </Link>
                      </div>
                   </div>
                </div>

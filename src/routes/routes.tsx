@@ -17,6 +17,7 @@ import Profile from "../pages/User/Profile";
 import ViewAllUsers from "../pages/Admin/ViewAllUsers";
 import ViewAllOrders from "../pages/Admin/ViewAllOrders";
 import ProtectedRoute from "./ProtectedRoute";
+import AboutPage from "../pages/AboutPage/AboutPage";
 
 const router = createBrowserRouter([
    {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
          {
             path: "/login",
             element: <Login />,
+         },
+         {
+            path: "/about-us",
+            element: <AboutPage />,
          },
          {
             path: "/register",

@@ -13,12 +13,11 @@ const ViewAllOrders = () => {
    const [currentPage, setCurrentPage] = useState(1);
    const [params, setParams] = useState<TQueryParams[] | undefined>(undefined);
 
-
    const { data, isLoading } = useGetAllOrdersQuery(params);
 
    const handlePageChange = (page: number) => {
       setCurrentPage(page); // Update current page
-      console.log('page',page);
+      console.log("page", page);
 
       // Preserve previous filters while updating the page number
       const queryParams: TQueryParams[] = [
@@ -100,19 +99,21 @@ const ViewAllOrders = () => {
    ];
 
    return (
-      <div style={{ padding: 20 }}>
-         <h2 className="text-2xl text-center my-4">All Orders</h2>
-         <Table
-            dataSource={data?.data?.data || []}
-            columns={columns}
-            rowKey="_id"
-            loading={isLoading}
-            scroll={{ x: 800 }} // Ensures responsiveness on small screens
-            bordered
-            pagination={false}
-         />
+      <div>
+         <h2 className="text-2xl text-center mb-4">All Orders</h2>
+         <div className="min-h-[70vh]">
+            <Table
+               dataSource={data?.data?.data || []}
+               columns={columns}
+               rowKey="_id"
+               loading={isLoading}
+               scroll={{ x: 800 }} // Ensures responsiveness on small screens
+               bordered
+               pagination={false}
+            />
+         </div>
          {/* Pagination */}
-         <div className="my-4 flex justify-center">
+         <div className=" flex justify-center">
             <Pagination
                current={currentPage}
                total={data?.data?.meta?.totalCount}

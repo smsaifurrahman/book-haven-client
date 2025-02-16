@@ -14,7 +14,7 @@ const FeaturedBooks = () => {
    console.log("from featuredBooks", books);
    return (
       <div>
-         <h3 className="text-2xl text-center my-6 font-semibold">
+         <h3 className="text-3xl font-bold text-center text-indigo-600 my-6 ">
             {" "}
             Featured Books
          </h3>
@@ -29,7 +29,7 @@ const FeaturedBooks = () => {
          )}
          <div className="text-center my-6">
           <Link to={'/books'}>
-          <Button  className="btn btn-primary"> View All </Button>
+          <Button  className="btn bg-indigo-700 text-white"> View All </Button>
           </Link>
          </div>
       </div>
