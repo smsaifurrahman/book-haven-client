@@ -26,7 +26,6 @@ export const adminPaths = [
             name: "View All Books",
             path: "view-all-books",
          },
-   
       ],
    },
    {
@@ -45,7 +44,6 @@ export const adminPaths = [
             name: "View All Orders",
             path: "view-all-orders",
          },
-
       ],
    },
 ];
@@ -59,11 +57,8 @@ export const userPaths = [
             name: "View My Orders",
             path: "view-my-orders",
          },
-        
       ],
    },
-
-  
 ];
 
 const Sidebar = () => {
@@ -101,8 +96,9 @@ const Sidebar = () => {
       >
          <div className="text-white mt-4 flex justify-center items-center">
             <Link to={"/"}>
-               {" "}
-               <Button> Home </Button>
+               <Button className="bg-blue-500 text-white hover:bg-blue-600">
+                  Back to Home
+               </Button>
             </Link>
          </div>
          <Menu

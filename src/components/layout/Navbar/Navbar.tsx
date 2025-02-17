@@ -3,108 +3,69 @@
 import { Link, NavLink } from "react-router-dom";
 import { getCurrentUser, logout } from "../../../redux/feature/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
-import { SVGProps } from "react";
 import { CartSheet } from "../../Cart/CartSheet";
 
 const Navbar = () => {
    const dispatch = useAppDispatch();
    const user = useAppSelector(getCurrentUser);
-   console.log(user);
-   const authLinks = (
-      <>
-         <li>
-            <NavLink
-               to={"/login"}
-               className={({ isActive }) =>
-                  isActive
-                     ? " font-bold text-2xl text-gray-600 p-2 text-rounded-xl "
-                     : "font-bold p-2 text-2xl text-orange-500 rounded-xl "
-               }
-            >
-               Login
-            </NavLink>
-         </li>
-         <li>
-            <NavLink
-               to={"/register"}
-               className={({ isActive }) =>
-                  isActive
-                     ? " font-bold text-2xl text-gray-600 p-2 text-rounded-xl "
-                     : "font-bold p-2 text-2xl text-orange-500 rounded-xl "
-               }
-            >
-               Register
-            </NavLink>
-         </li>
-         <li>
-            <NavLink
-               to={"/books"}
-               className={({ isActive }) =>
-                  isActive
-                     ? " font-bold text-2xl text-gray-600 p-2 text-rounded-xl "
-                     : "font-bold p-2 text-2xl text-orange-500 rounded-xl "
-               }
-            ></NavLink>
-         </li>
-      </>
-   );
+
+   const handleLogOut = () => {
+      dispatch(logout());
+   };
 
    const navLinks = (
       <>
          <li>
             <NavLink
-               to={"/"}
+               to="/"
                className={({ isActive }) =>
                   isActive
-                     ? " font-bold text-2xl text-gray-600 p-2 text-rounded-xl "
-                     : "font-bold p-2 text-2xl text-orange-500 rounded-xl "
+                     ? "text-indigo-700 font-semibold text-lg px-4 py-2 border-b-2 border-indigo-700"
+                     : "text-gray-600 hover:text-indigo-600 font-medium text-lg px-4 py-2 transition-colors duration-200"
                }
+               style={{ outline: 'none', boxShadow: 'none' }} // Disable focus and active states that cause flickering
             >
                Home
             </NavLink>
          </li>
          <li>
             <NavLink
-               to={"/books"}
+               to="/books"
                className={({ isActive }) =>
                   isActive
-                     ? " font-bold text-2xl text-gray-600 p-2 text-rounded-xl "
-                     : "font-bold p-2 text-2xl text-orange-500 rounded-xl "
+                     ? "text-indigo-700 font-semibold text-lg px-4 py-2 border-b-2 border-indigo-700"
+                     : "text-gray-600 hover:text-indigo-600 font-medium text-lg px-4 py-2 transition-colors duration-200"
                }
+               style={{ outline: 'none', boxShadow: 'none' }} // Disable focus and active states that cause flickering
             >
                All Books
             </NavLink>
          </li>
-
          <li>
             <NavLink
-               to={"/about-us"}
+               to="/about-us"
                className={({ isActive }) =>
                   isActive
-                     ? " font-bold text-2xl text-gray-600 p-2 text-rounded-xl "
-                     : "font-bold p-2 text-2xl text-orange-500 rounded-xl "
+                     ? "text-indigo-700 font-semibold text-lg px-4 py-2 border-b-2 border-indigo-700"
+                     : "text-gray-600 hover:text-indigo-600 font-medium text-lg px-4 py-2 transition-colors duration-200"
                }
-            >About Us</NavLink>
+               style={{ outline: 'none', boxShadow: 'none' }} // Disable focus and active states that cause flickering
+            >
+               About Us
+            </NavLink>
          </li>
       </>
    );
 
-   const handleLogOut = () => {
-      dispatch(logout());
-   };
-
    return (
-      <div className="navbar bg-green-100">
-         <div className="navbar-start">
-            <div className="dropdown">
-               <div
-                  tabIndex={0}
-                  role="button"
-                  className="btn btn-ghost lg:hidden"
-               >
+      <div className="navbar bg-gray-50 shadow-sm">
+         {/* Mobile menu button */}
+         <div className="navbar-start lg:hidden">
+            <div className="dropdown dropdown-bottom">
+               <div tabIndex={0} role="button" className="btn btn-ghost">
                   <svg
                      xmlns="http://www.w3.org/2000/svg"
-                     className="h-5 w-5"
+                     className="h-6 w-6"
                      fill="none"
                      viewBox="0 0 24 24"
                      stroke="currentColor"
@@ -113,88 +74,84 @@ const Navbar = () => {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth="2"
-                        d="M4 6h16M4 12h8m-8 6h16"
+                        d="M4 6h16M4 12h16M4 18h16"
                      />
                   </svg>
                </div>
                <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                  className="dropdown-content z-[100] menu p-2 shadow bg-base-100 rounded-box w-52 mt-1"
                >
                   {navLinks}
                </ul>
             </div>
-            <a className="btn btn-ghost text-xl">Book-Haven</a>
          </div>
+
+         <div className="navbar-start">
+            <Link to="/" className="btn btn-ghost">
+               <span className="text-2xl mr-4 lg:mr-0 font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                  BookHaven
+               </span>
+            </Link>
+         </div>
+
+         {/* Desktop menu */}
          <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">{navLinks}</ul>
-     
+            <ul className="menu menu-horizontal px-1 gap-2">{navLinks}</ul>
          </div>
-      
-         <div className="navbar-end">
-         <CartSheet />
+
+         {/* Right side section */}
+         <div className="navbar-end gap-4">
+            <CartSheet />
+
             {user ? (
                <div className="dropdown dropdown-end">
-                  <div
-                     tabIndex={0}
-                     role="button"
-                     className="btn btn-ghost btn-circle avatar"
-                  >
-                     <div className="w-10 rounded-full">
+                  <div tabIndex={0} className="avatar online">
+                     <div className="w-10 rounded-full ring-2 ring-indigo-600 ring-offset-2">
                         <img
-                           alt="Tailwind CSS Navbar component"
                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                           alt="User Avatar"
                         />
-                        ;
                      </div>
                   </div>
-                  <ul
-                     tabIndex={0}
-                     className="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-base-100 rounded-box w-48"
-                  >
-                    
-                    {
-                     user?.role == 'user' &&  <li>
-                     <Link
-                        to={"/profile"}
-                        className=" text-xl font-sans justify-between"
-                     >
-                        Profile
-                     </Link>
-                  </li>
-                    }
+                  <ul className="dropdown-content z-[10] menu p-2 shadow bg-white rounded-box w-48 mt-4">
+                     {user.role === "user" && (
+                        <li>
+                           <Link to="/profile" className="text-gray-700 hover:bg-indigo-50">
+                              Profile
+                           </Link>
+                        </li>
+                     )}
                      <li>
-                        <Link
-                           to={"/dashboard"}
-                           className=" text-xl font-sans justify-between"
-                        >
+                        <Link to="/dashboard" className="text-gray-700 hover:bg-indigo-50">
                            Dashboard
                         </Link>
                      </li>
-
-                     <li onClick={handleLogOut}>
-                        <a className=" text-xl font-sans justify-between">
+                     <li>
+                        <button
+                           onClick={handleLogOut}
+                           className="text-red-600 hover:bg-red-50"
+                        >
                            Logout
-                        </a>
+                        </button>
                      </li>
                   </ul>
                </div>
             ) : (
-               <>
-                  {" "}
-                  <Link to={"/login"}>
-                     {" "}
-                     <button className="btn bg-blue-500 hover:bg-blue-700 text-white font-bold mr-2">
-                        Login
-                     </button>{" "}
+               <div className="flex gap-2">
+                  <Link
+                     to="/login"
+                     className="btn btn-outline px-6 text-indigo-600 hover:bg-indigo-600 hover:text-white hover:border-indigo-600"
+                  >
+                     Login
                   </Link>
-                  <Link to={"/register"}>
-                     {" "}
-                     <button className="btn bg-blue-500 hover:bg-blue-700 text-white font-bold">
-                        Register
-                     </button>{" "}
+                  <Link
+                     to="/register"
+                     className="btn px-6 bg-indigo-600 text-white hover:bg-indigo-700"
+                  >
+                     Register
                   </Link>
-               </>
+               </div>
             )}
          </div>
       </div>
@@ -202,5 +159,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-

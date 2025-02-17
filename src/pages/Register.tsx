@@ -5,6 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppDispatch } from "../redux/hook";
 import { toast } from "sonner";
 import { useRegisterMutation } from "../redux/api/authApi";
+import { Link } from "react-router-dom";
 
 
 type Inputs = {
@@ -51,7 +52,7 @@ const Register = () => {
    };
 
    return (
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex justify-center items-center ">
          <div className="flex flex-col max-w-md rounded-md sm:p-6 dark:bg-gray-50 dark:text-gray-800 shadow-lg">
             <div className="mb-8 text-center">
                <h1 className="my-3 text-4xl font-bold">Register</h1>
@@ -145,20 +146,20 @@ const Register = () => {
                   <div>
                      <button
                         type="submit"
-                        className="w-full px-8 btn py-3 font-semibold rounded-md dark:bg-violet-600 dark:text-gray-50 hover:bg-violet-500"
+                        className="w-full bg-indigo-500 text-white px-8 btn py-3 font-semibold rounded-md dark:bg-violet-600 dark:text-gray-50 hover:bg-violet-500"
                      >
                         Register
                      </button>
                   </div>
                   <p className="px-6 text-sm text-center dark:text-gray-600">
                      Already have an account?{" "}
-                     <a
+                     <Link to={'/login'}
                         rel="noopener noreferrer"
-                        href="#"
+                   
                         className="hover:underline dark:text-violet-600"
                      >
-                        Sign in
-                     </a>
+                        Sign In here
+                     </Link>
                      .
                   </p>
                </div>

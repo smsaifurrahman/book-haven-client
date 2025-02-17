@@ -6,7 +6,7 @@ import { useAppDispatch } from "../redux/hook";
 import { toast } from "sonner";
 import { verifyToken } from "../utils/verifyToken";
 import { setUser } from "../redux/feature/auth/authSlice";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 type Inputs = {
    email: string;
@@ -56,7 +56,7 @@ const Login = () => {
    };
 
    return (
-      <div className="flex justify-center items-center min-h-screen  ">
+      <div className="flex justify-center items-center   ">
          <div className="flex flex-col max-w-md  rounded-md sm:p-6 dark:bg-gray-50 dark:text-gray-800 shadow-lg">
             <div className="mb-8 text-center">
                <h1 className="my-3 text-4xl font-bold">Sign in</h1>
@@ -136,20 +136,20 @@ const Login = () => {
                   <div>
                      <button
                         type="submit"
-                        className="w-full px-8 btn py-3 font-semibold rounded-md dark:bg-violet-600 dark:text-gray-50 hover:bg-violet-500"
+                        className="w-full text-white bg-indigo-500 px-8 btn py-3 font-semibold rounded-md dark:bg-indigo-600 dark:text-white-50 hover:bg-violet-500"
                      >
                         Sign in
                      </button>
                   </div>
                   <p className="px-6 text-sm text-center dark:text-gray-600">
                      Don't have an account yet?{" "}
-                     <a
+                     <Link to={'/register'}
                         rel="noopener noreferrer"
-                        href="#"
+                   
                         className="hover:underline dark:text-violet-600"
                      >
-                        Sign up
-                     </a>
+                        Register Here
+                     </Link>
                      .
                   </p>
                </div>

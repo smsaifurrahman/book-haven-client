@@ -10,6 +10,7 @@ const ViewMyOrders = () => {
 
   const { data: orderData, isLoading } = useGetMyOrdersQuery(user_id);
 
+  console.log('orderData',orderData);
   // Function to return colored Tag for status
   const getStatusTag = (status: string) => {
     let color = "default";
@@ -103,6 +104,7 @@ const ViewMyOrders = () => {
         dataSource={tableData}
         loading={isLoading}
         bordered
+        pagination={false}
         scroll={{ x: "max-content" }} // Enable horizontal scroll on small screens
       />
     </div>
