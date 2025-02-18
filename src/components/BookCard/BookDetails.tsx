@@ -99,7 +99,7 @@ const book = data?.data;
                      </span></p>
                   {/* Action Buttons */}
                   <div className=" mt-6 flex flex-wrap gap-4">
-                     <Button  onClick={() => handleAddToCart()} className="bg-gray-200 hover:bg-gray-300 px-6 py-2 rounded-md shadow-md">
+                     <Button  onClick={() => handleAddToCart()} className="bg-indigo-500 text-white font-semibold hover:bg-indigo-600">
                         Add to Cart
                      </Button>
                   </div>
@@ -107,7 +107,7 @@ const book = data?.data;
             </div>
          </div>
 
-         {/* Reviews Section */}
+         {/* Reviews Section
          <div className="mt-10 bg-gray-100 p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-4">Customer Reviews</h2>
             <p className="text-gray-600">
@@ -116,7 +116,7 @@ const book = data?.data;
             <p className="text-gray-600">
                ⭐⭐⭐⭐ "Great story, but a bit long."
             </p>
-         </div>
+         </div> */}
       </div>
    );
 };

@@ -21,8 +21,18 @@ const userApi = baseApi.injectEndpoints({
            };
         },
      }),
+      updateUserInfo: builder.mutation({
+        query: (data) => {
+           console.log("Data being sent:", data); // Log the data
+           return {
+              url: "/users/update/",
+              method: "PATCH",
+              body: data,
+           };
+        },
+     }),
      
    }),
 });
 
-export const { useGetSingleUserQuery, useChangePasswordMutation } = userApi;
+export const { useGetSingleUserQuery, useChangePasswordMutation, useUpdateUserInfoMutation } = userApi;

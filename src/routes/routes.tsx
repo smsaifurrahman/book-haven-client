@@ -18,6 +18,7 @@ import ViewAllUsers from "../pages/Admin/ViewAllUsers";
 import ViewAllOrders from "../pages/Admin/ViewAllOrders";
 import ProtectedRoute from "./ProtectedRoute";
 import AboutPage from "../pages/AboutPage/AboutPage";
+import CheckoutPage from "../pages/Checkoutpage/CheckoutPage";
 
 const router = createBrowserRouter([
    {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
          {
             path: "/book-details/:id",
             element: <BookDetails />,
+         },
+         {
+            path: "/checkout",
+            element: <CheckoutPage />,
          },
          {
             path: "/order/verify",

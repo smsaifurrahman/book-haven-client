@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppDispatch } from "../redux/hook";
 import { toast } from "sonner";
 import { useRegisterMutation } from "../redux/api/authApi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 type Inputs = {
@@ -16,6 +16,7 @@ type Inputs = {
 
 const Register = () => {
    const [register] = useRegisterMutation(); // Hook for register mutation
+   const navigate = useNavigate();
    const disPatch = useAppDispatch();
    const {
       register: formRegister,
@@ -45,6 +46,7 @@ const Register = () => {
             id: toastId,
             duration: 1000,
          });
+         navigate('/login')
       } catch (err) {
          console.error(err);
          toast.error("Something went wrong", { id: toastId, duration: 1000 });

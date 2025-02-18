@@ -9,8 +9,8 @@ const MainLayout = () => {
    return (
     <div className=" mx-2 flex  flex-col min-h-screen"> 
     {/* Navbar at the top */}
-    {/* <Navbar /> */}
-    <NavbarNew />
+    <Navbar />
+    {/* <NavbarNew /> */}
     
 
     {/* Main content that expands */}

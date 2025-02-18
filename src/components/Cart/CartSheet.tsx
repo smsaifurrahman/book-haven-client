@@ -12,7 +12,7 @@ import {
    SheetTitle,
    SheetTrigger,
 } from "../ui/sheet";
-import { ShoppingBagIcon } from "lucide-react";
+import { CloudCog, ShoppingBagIcon } from "lucide-react";
 import { useCreateOrderMutation } from "../../redux/feature/order/order";
 import { useEffect } from "react";
 import { toast } from "sonner";
@@ -23,48 +23,24 @@ import {
 import { Badge } from "../ui/badge";
 import { useCurrentToken } from "../../redux/feature/auth/authSlice";
 
-import { useNavigate } from "react-router-dom";
+import { replace, useNavigate } from "react-router-dom";
 
 export const CartSheet = () => {
    const dispatch = useAppDispatch();
 
-    const token = useAppSelector(useCurrentToken);
-    const navigate = useNavigate();
-      
+   const token = useAppSelector(useCurrentToken);
+   const navigate = useNavigate();
 
    const cartData = useAppSelector((state) => state.cart);
    console.log(cartData.totalQuantity);
 
-   const [createOrder, { isLoading, isSuccess, data, isError, error }] =
-      useCreateOrderMutation();
-  
-
-   const handlePlaceOrder = async () => {
-
-      if(!token) {
-       
-         return navigate('/login')
-         // return <Navigate to={"/login"} replace={true} />;
+   const handlePlaceOrder = () => {
+      if (!token) {
+         navigate("/login");
+      } else {
+         navigate("/checkout"); // Go to the checkout page instead of creating the order
       }
-
-      await createOrder({ products: cartData.items });
    };
-
-   const toastId = "cart";
-   useEffect(() => {
-      if (isLoading) toast.loading("Processing ...", { id: toastId });
-
-      if (isSuccess) {
-         toast.success(data?.message, { id: toastId });
-         if (data?.data) {
-            setTimeout(() => {
-               window.location.href = data.data;
-            }, 1000);
-         }
-      }
-
-      if (isError) toast.error(JSON.stringify(error), { id: toastId });
-   }, [data?.data, data?.message, error, isError, isLoading, isSuccess]);
 
    return (
       <Sheet>
@@ -183,7 +159,13 @@ export const CartSheet = () => {
 
             <SheetFooter className="border-t pt-4">
                <SheetClose asChild>
-                  <Button className="w-full" onClick={handlePlaceOrder}>
+                  <Button
+                     className={`w-full text-white font-bold bg-green-600 ${
+                        cartData.items.length === 0 ? "blur-sm" : ""
+                     }`}
+                     onClick={handlePlaceOrder}
+                     disabled={cartData.items.length === 0} // Disable button if cart is empty
+                  >
                      Order Now
                   </Button>
                </SheetClose>

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const BookCard = ({ book }) => {
    return (
-      <div className="card card-side bg-base-100 shadow-xl flex h-full lg:h-72">
+      <div className="card card-side bg-base-100 shadow-xl flex h-full lg:h-72 transition-transform transform hover:scale-105 hover:shadow-2xl">
          <figure className="w-1/2 rounded-xl">
             <img src={book.imageUrl} className="w-full h-full object-cover" />
          </figure>
@@ -31,7 +31,7 @@ const BookCard = ({ book }) => {
 
             <div className=" ">
                <Link to={`/book-details/${book?._id}`}>
-                  <Button className="bg-red-50"> View Details </Button>
+                  <Button className=" border-indigo-600 border-2 font-semibold"> View Details </Button>
                </Link>
             </div> 
             {/* <div className=" ">

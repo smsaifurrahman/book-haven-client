@@ -1,6 +1,4 @@
-/** @format */
-
-import { Button, Layout } from "antd";
+import { Button, Layout, message } from "antd";
 import { Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { useAppDispatch } from "../../redux/hook";
@@ -9,17 +7,14 @@ import { logout } from "../../redux/feature/auth/authSlice";
 const { Header, Content } = Layout;
 
 const DashboardLayout = () => {
+   const dispatch = useAppDispatch();
+   const navigate = useNavigate();
 
-      const dispatch = useAppDispatch();
-      const navigate = useNavigate();
-   
-   
-      const handleLogOut = () => {
-         dispatch(logout());
-         console.log("Logging out... Redirecting to home page");
-         navigate('/');
-      };
-   
+   const handleLogOut = () => {
+      dispatch(logout());
+      message.info("Logging out... Redirecting to home page");
+      navigate('/');
+   };
 
    return (
       <Layout style={{ height: "100%" }}>

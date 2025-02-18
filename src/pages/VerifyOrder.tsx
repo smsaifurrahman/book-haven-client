@@ -134,7 +134,7 @@ export default function OrderVerification() {
             </dl>
           </CardContent>
         </Card>
-
+{/* 
         <Card>
           <CardHeader>
             <CardTitle>Verification Status</CardTitle>
@@ -159,7 +159,7 @@ export default function OrderVerification() {
               <Button className="w-full">View Orders</Button>
             </Link>
           </CardFooter>
-        </Card>
+        </Card> */}
       </div>
     </div>
   );
